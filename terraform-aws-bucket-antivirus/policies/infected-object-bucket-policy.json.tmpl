@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublic",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "logs:CreateLogStream",
+                "lambda:InvokeFunction",
+                "lambda:InvokeAsync",
+                "lambda:GetFunction",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:s3:::${ bucket-name }/*"
+        }
+    ]
+}

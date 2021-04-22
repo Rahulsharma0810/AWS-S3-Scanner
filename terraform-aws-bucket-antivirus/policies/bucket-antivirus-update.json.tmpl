@@ -1,0 +1,29 @@
+{
+  "Version":"2012-10-17",
+  "Statement":[
+     {
+        "Effect":"Allow",
+        "Action":[
+           "logs:CreateLogGroup",
+           "logs:CreateLogStream",
+           "logs:PutLogEvents"
+        ],
+        "Resource":"*"
+     },
+     {
+        "Action":[
+           "s3:GetObject",
+           "s3:GetObjectTagging",
+           "s3:PutObject",
+           "s3:PutObjectTagging",
+           "s3:PutObjectVersionTagging",
+           "s3:ListBucket"
+        ],
+        "Effect":"Allow",
+        "Resource":[
+            "arn:aws:s3:::${bucket-name}/*",
+            "arn:aws:s3:::${bucket-name}"
+        ]
+     }
+  ]
+}
