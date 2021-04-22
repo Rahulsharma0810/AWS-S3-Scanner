@@ -3,7 +3,7 @@
 
 Scan new objects added to any s3 bucket using AWS Lambda. The Repo is Mod of [bucket-antivirus-function](https://github.com/UKForeignOffice/bucket-antivirus-function), Kudos  👏 to contributers.
 
-![AWS-ClamAV-S3-Scanner-Diagram](images/AWS-ClamAV-S3-Scanner-Diagram.png)
+![AWS-ClamAV-S3-Scanner-Diagram](terraform-aws-bucket-antivirus/images/AWS-ClamAV-S3-Scanner-Diagram.png)
 
 ## Overview
 
