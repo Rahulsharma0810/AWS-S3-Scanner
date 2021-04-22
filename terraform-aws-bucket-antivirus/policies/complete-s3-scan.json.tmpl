@@ -1,0 +1,64 @@
+{
+  "Version":"2012-10-17",
+  "Statement":[
+     {
+        "Effect":"Allow",
+        "Action":[
+           "logs:CreateLogGroup",
+           "logs:CreateLogStream",
+           "logs:PutLogEvents"
+        ],
+        "Resource":"*"
+     },
+     {
+        "Action":[
+           "s3:GetObject",
+           "s3:GetObjectTagging",
+           "s3:PutObjectTagging",
+           "s3:PutObject",
+           "s3:PutObjectAcl",
+           "s3:PutObjectVersionTagging",
+           "s3:DeleteObject*",
+           "s3:ListBucket"
+        ],
+        "Effect":"Allow",
+        "Resource": ${ jsonencode(
+            concat(
+                 [for bucket-name in bucket-names: "arn:aws:s3:::${bucket-name}/*"],
+                 [for bucket-name in bucket-names: "arn:aws:s3:::${bucket-name}"],
+            )
+        ) }
+     },
+     {
+        "Action":[
+           "s3:GetObject",
+           "s3:GetObjectTagging",
+           "s3:ListBucket"
+        ],
+        "Effect":"Allow",
+        "Resource": [
+          "arn:aws:s3:::${ antivirus-definitions-bucket-name }/*",
+          "arn:aws:s3:::${ antivirus-definitions-bucket-name }"
+        ]
+     },
+     {
+        "Action":[
+           "kms:Decrypt"
+        ],
+        "Effect":"Allow",
+        "Resource": ${ jsonencode([for bucket-name in bucket-names: "arn:aws:s3:::${bucket-name}/*"]) }
+     },
+
+
+     {
+         "Effect": "Allow",
+         "Action": [
+          "lambda:InvokeFunction",
+          "lambda:InvokeAsync",
+          "lambda:GetFunction"
+         ],
+         "Resource": "*"
+     }
+
+  ]
+}
